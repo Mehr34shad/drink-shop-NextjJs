@@ -3,10 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { orderBy } from 'lodash';
 import { ToastContainer } from 'react-toastify';
 import Contexts from '../context/contexts';
-import { getAllBeerList } from '../services/beerList';
 import { getBeerPairPizza } from '../services/beerPairPizza';
 import { getBeerPairSteak } from '../services/beerPairSteak';
-import { getMovies } from './../services/crud';
+import { getAllBeerList } from '../services/beerList';
 import {
   errorMessage,
   infoMessage,
@@ -15,7 +14,6 @@ import {
 } from '../utils/message';
 
 const Global = (props) => {
-
   const [Cards, setCards] = useState([]);
   const [Favorite, setFavorite] = useState([]);
   const [AllBeers, setAllBeers] = useState([]);
@@ -23,16 +21,15 @@ const Global = (props) => {
   const [BeerPairSteak, setBeerPairSteak] = useState([]);
   const [total, setTotal] = useState(0);
 
-  const allbeer = async () => {
+  const allbeer = async (path) => {
     try {
-      // const all = await getAllBeerList();
-      const all = await getMovies();
+      const all = await getAllBeerList();
+      // const all = await AllBeerList(path);
       const pizza = await getBeerPairPizza();
       const Steak = await getBeerPairSteak();
       setBeerPairSteak(Steak.data);
       setBeerPairPizza(pizza.data);
-      setAllBeers(all);
- 
+      setAllBeers(all.data);
     } catch (err) {
       warningMessage('Check your internet connection');
       console.error(err);
@@ -181,15 +178,3 @@ const Global = (props) => {
 };
 
 export default Global;
-
-// export async function getServerSideProps() {
-//   let res = await fetch(`https://api.punkapi.com/v2/beers`);
-//   let beers = await res.json();
-//   console.log(post);
-
-//   return {
-//     props: {
-//       beers,
-//     },
-//   };
-// }

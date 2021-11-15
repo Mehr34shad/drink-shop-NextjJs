@@ -1,5 +1,4 @@
 import '../../public/css/bootstrap.min.css';
-// import 'bootstrap/dist/css/bootstrap.min';
 import '../../public/css/font-awesome.min.css';
 import '../../public/css/Style.css';
 import '../../public/css/button.css';
